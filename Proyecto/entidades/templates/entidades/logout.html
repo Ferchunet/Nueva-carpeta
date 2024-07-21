@@ -1,0 +1,17 @@
+
+
+{% block titulo %}
+
+{% endblock titulo %}
+
+{% block contenido %}
+<div class="alert alert-danger" role="alert" style="background: linear-gradient(to right, red, orange); color: white; text-align: center;">
+    Deslogueado exitosamente
+</div>
+
+<script>
+    setTimeout(function() {
+        window.location.href = "{% url 'inicio' %}";
+    }, 1000);
+</script>
+{% endblock contenido %}

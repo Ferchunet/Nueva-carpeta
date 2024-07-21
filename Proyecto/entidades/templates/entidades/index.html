@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>escuela de musica</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i"
+        rel="stylesheet" />
+    <!-- Bootstrap core CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.2.3/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles -->
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+    <style>
+        .navbar-custom .navbar-brand {
+            margin-right: auto;
+            /* Alinear a la derecha */
+            margin-left: auto;
+            /* Alinear a la izquierda */
+        }
+
+        .navbar-custom .navbar-nav {
+            justify-content: center;
+            /* Centrar los elementos del navbar */
+        }
+
+        .navbar-custom .nav-item {
+            margin-left: 15px;
+            /* Espacio entre elementos */
+        }
+
+        .navbar-custom .nav-link {
+            color: white;
+            /* Color del texto */
+        }
+
+        .navbar-custom .nav-link:hover {
+            color: #ff6600;
+            /* Color del texto al pasar el cursor */
+        }
+
+        /* Estilo para el header */
+        .masthead {
+            height: 500px;
+            /* 20% del alto de la página */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container-ofrecemos {
+            max-width: 100%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 5px;
+        }
+    .container .px-5{
+        max-width: 100%;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        border-radius: 5px;
+    }
+    h2 {
+        color: #000000;
+        text-align: center;
+    }
+    .icon {
+        font-size: 2rem;
+        margin-right: 10px;
+        color: #007bff;
+    }
+    ul {
+        list-style: none;
+        padding-left: 0;
+    }
+    ul li {
+        margin-bottom: 10px;
+    }
+    .container-ofrecemos {
+        text-align: center; /* Alinea el contenido al centro */
+    }
+    .container-ofrecemos ul {
+        list-style-type: none; /* Elimina los puntos de lista */
+        padding: 0;
+    }
+    .container-ofrecemos li {
+        display: inline-block; /* Mostrar los elementos de lista en línea */
+        margin: 10px; /* Espacio entre elementos de lista */
+    }
+    .container-ofrecemos li i {
+        font-size: 24px; /* Tamaño de los íconos */
+        margin-bottom: 10px; /* Espacio bajo los íconos */
+    }
+    .btn-contactar {
+        display: inline-block;
+        padding: 10px 20px;
+        background: linear-gradient(135deg, #ff4500, #ff8c00); /* Degradado rojo a naranja */
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+        border: none; /* Elimina el borde del botón */
+        cursor: pointer;
+    }
+    .btn-contactar:hover {
+        background: linear-gradient(135deg, #ff8c00, #ff4500); /* Degradado invertido al pasar el mouse */
+    }
+    </style>
+</head>
+
+<body id="page-top">
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+        <div class="container px-5">
+         
+    
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+    
+            <div class="collapse navbar-collapse justify-content-center" id="navbarResponsive">
+                <ul class="navbar-nav">
+                    {% if user.is_authenticated %}
+                    <a class="navbar-brand" href="{% url 'inicio' %}">
+                        <i class="fas fa-home"></i> Inicio
+                    </a>
+                  
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'cursos' %}">
+                            <i class="fas fa-graduation-cap"></i> Cursos
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'profesores' %}">
+                            <i class="fas fa-chalkboard-teacher"></i> Profesores
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'listar_estudiantes' %}">
+                            <i class="fas fa-user-graduate"></i> Estudiantes
+                        </a>
+                    </li>
+                    
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="">
+                            <i class="fas fa-tasks"></i>Biblioteca
+                        </a>
+                    </li>
+                    
+                        <li class="nav-item">
+                            <a href="{% url 'agregar_avatar' %}"><img src="{{ request.session.avatar }}" height="40px" weight="40px" alt="mi foto"></a>
+            
+                        </li>
+                   
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'perfil' %}">
+                           perfil
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                            {% csrf_token %}
+                            <button class="btn btn-primary" type="submit">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </button>
+                        </form>
+                    </li>
+                    {% else %}
+                <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </a>
+                    </li>
+                
+                  
+                    
+                    {% endif %}
+                </ul>
+            </div>
+            
+    
+            <div class="collapse navbar-collapse justify-content-end" id="navbarResponsive">
+                {% if user.is_authenticated %}
+                <p style="color: blue;">Bienvenide, {{ user.first_name }} {{ user.last_name }}</p>
+
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+    
+
+    <!-- Header-->
+    <header class="masthead text-center text-white" style="background-color: #343a40;">
+        <div class="container px-5">
+            <h1 class="masthead-heading mb-0">ESCUELA DE MUSICA</h1>
+            <h2 class="masthead-subheading mb-0">BIENVENIDOS</h2>
+            <a class="btn btn-primary btn-xl rounded-pill mt-5" href="#scroll">Contactar</a>
+        </div>
+    </header>
+
+    <section class="py-5">
+        <div class="container px-5">
+          
+<!-- Content section 1-->
+<section>
+    <div class="container px-5">
+        <div class="row gx-5 align-items-center">
+            <div class="col-lg-6 order-lg-2">
+                <div class="p-5">
+                    <img class="img-fluid rounded-circle" src="{% static 'assets/img/01.jpg' %}" alt="..." />
+                </div>
+            </div>
+            <div class="col-lg-6 order-lg-1">
+                <div class="p-5">
+                    <h2 class="display-4">🎸 ¡Aprende a Tocar la Guitarra con Nosotros! 🎸</h2>
+                    <p>Descubre el apasionante mundo de la música con nuestras clases de guitarra diseñadas para todos los niveles. Ya seas principiante o avanzado, nuestros profesores experimentados te guiarán en tu viaje musical, adaptando las lecciones a tus necesidades y ritmo de aprendizaje.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Content section 2-->
+<section>
+    <div class="container px-5">
+        <div class="row gx-5 align-items-center">
+            <div class="col-lg-6">
+                <div class="p-5">
+                    <img class="img-fluid rounded-circle" src="{% static 'assets/img/02.jpeg' %}" alt="..." />
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="p-5">
+                    <h2 class="display-4">🎹 ¡Aprende a Tocar el Piano con Nosotros! 🎹</h2>
+
+                           <p>Sumérgete en el maravilloso mundo de la música con nuestras clases de piano, diseñadas para todos los niveles y edades. Ya seas principiante o avanzado, nuestros talentosos profesores te guiarán paso a paso para alcanzar tus metas musicales.</p>
+        
+            </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Content section 3-->
+<section>
+    <div class="container px-5">
+        <div class="row gx-5 align-items-center">
+            <div class="col-lg-6 order-lg-2">
+                <div class="p-5">
+                    <img class="img-fluid rounded-circle" src="{% static 'assets/img/03.jpeg' %}" alt="..." />
+                </div>
+            </div>
+            <div class="col-lg-6 order-lg-1">
+                <div class="p-5">
+                    <h2 class="display-4">🎤 ¡Aprende a Cantar con Nosotros! 🎤</h2>
+
+                    <p>¡Claro! Aquí tienes un texto promocional para una clase de canto:
+
+                        ---
+                        
+                        ¡Descubre tu voz y mejora tus habilidades vocales con nuestras clases de canto! Aprende técnicas profesionales y disfruta de un ambiente amigable y motivador. Horarios flexibles disponibles. ¡Inscríbete hoy mismo y comienza tu viaje hacia una voz más fuerte y segura! 🎶</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+
+    <div class="container-ofrecemos">
+        <h2>Lo que ofrecemos</h2>
+        <ul>
+            <li><i class="fas fa-music"></i> Catálogo de Cursos: Detalles sobre diferentes cursos y clases.</li>
+            <li><i class="fas fa-user-graduate"></i> Inscripción y Matrícula: Información sobre cómo inscribirse y requisitos.</li>
+            <li><i class="far fa-calendar-alt"></i> Calendario de Clases: Fechas de inicio y eventos especiales.</li>
+            <li><i class="fas fa-chalkboard-teacher"></i> Profesores y Staff: Perfiles de instructores y personal.</li>
+            <li><i class="fas fa-book"></i> Recursos Educativos: Acceso a partituras, grabaciones y libros.</li>
+            <li><i class="far fa-calendar-check"></i> Eventos y Recitales: Anuncios de conciertos y audiciones.</li>
+            <li><i class="fas fa-building"></i> Instalaciones y Equipamiento: Descripción de instalaciones y equipos.</li>
+            <li><i class="fas fa-comments"></i> Testimonios y Experiencias: Opiniones de estudiantes.</li>
+            <li><i class="far fa-newspaper"></i> Blog o Noticias: Artículos sobre tendencias y consejos.</li>
+            <li><i class="fas fa-map-marker-alt"></i> Contacto y Ubicación: Formulario de contacto y dirección.</li>
+        </ul>
+        <div>   <a href="formulario.html" class="btn-contactar">Contactar</a></div>
+
+    </div>
+  
+</section>
+        </div>
+    </section>
+
+    <!-- Footer-->
+
+    <footer style="background-color: black; color: white; padding: 20px;">
+        <div class="container text-center">
+            <div class="row">
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <h4 class="text-uppercase">Contacto</h4>
+                    <p class="lead mb-0">Dirección: Av. Música 123, Ciudad Melodía</p>
+                    <p class="lead mb-0">Teléfono: +1 (555) 123-4567</p>
+                    <p class="lead mb-0">Email: info@tuescuelamusical.com</p>
+                </div>
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <h4 class="text-uppercase">Redes Sociales</h4>
+                    <ul class="list-inline">
+                        <li class="list-inline-item">
+                            <a href="#" target="_blank" title="Síguenos en Facebook"><i class="fab fa-facebook-f"></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#" target="_blank" title="Síguenos en Twitter"><i class="fab fa-twitter"></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#" target="_blank" title="Síguenos en Instagram"><i class="fab fa-instagram"></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#" target="_blank" title="Síguenos en LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h4 class="text-uppercase">Acerca de Nosotros</h4>
+                    <p class="lead">Somos una escuela de música comprometida con la excelencia artística y educativa. Ofrecemos clases personalizadas de instrumentos, teoría musical y producción musical para estudiantes de todas las edades y niveles. Nuestro objetivo es inspirar y nutrir el talento musical de cada alumno, proporcionando un ambiente de aprendizaje estimulante y profesional.</p>
+                </div>
+            </div>
+        </div>
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            &copy; {{ year }} Tu Escuela Musical. Todos los derechos reservados.
+        </div>
+    </footer>
+    
+    
+
+    <!-- Bootstrap core JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS -->
+    <script src="{% static 'js/scripts.js' %}"></script>
+</body>
+
+</html>
+
+

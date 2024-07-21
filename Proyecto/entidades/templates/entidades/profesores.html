@@ -1,0 +1,72 @@
+{% extends "entidades/home.html" %}
+
+{% block titulo %}
+<h1 class="mb-5">Profesores</h1>
+{% endblock titulo %}
+
+{% block contenido %}
+<style>
+    /* Estilos específicos para la impresión */
+    @media print {
+        .no-print {
+            display: none;
+        }
+    }
+
+    /* Fondo blanco para las tablas */
+    .table {
+        background-color: #ffffff;
+    }
+</style>
+
+<!-- Botón para agregar un nuevo profesor -->
+<a href="{% url 'profesorCreate' %}" class="btn btn-success mb-3">
+    <i class="fa fa-plus"></i> Agregar Profesor
+</a>
+
+
+<table class="table table-striped table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Email</th>
+            <th>Telefono</th>
+            <th>Asistencias</th>
+            <th>Faltas</th>
+            <th class="no-print">Acciones</th> <!-- Agregar clase 'no-print' -->
+        </tr>
+    </thead>
+    <tbody>
+    {% for data in asistencia_data %}
+        <tr>
+            <td>{{ data.profesor.id }}</td>
+            <td>{{ data.profesor.nombre }}</td>
+            <td>{{ data.profesor.apellido }}</td>
+            <td>{{ data.profesor.email }}</td>
+            <td>{{ data.profesor.telefono }}</td>
+            <td>{{ data.asistencias }}</td>
+            <td>{{ data.faltas }}</td>
+            <td class="no-print"> <!-- Agregar clase 'no-print' -->
+                <a href="{% url 'profesorUpdate' data.profesor.id %}" class="btn btn-primary btn-sm">
+                    <i class="fa fa-edit fa-sm" title="Edit Record"></i>
+                </a>
+                <a href="{% url 'profesorDelete' data.profesor.id %}" class="btn btn-danger btn-sm">
+                    <i class="fa fa-trash fa-sm" title="Delete Record"></i>
+                </a>
+                <a href="{% url 'registrar_asistencia_profesores' %}" class="btn btn-info btn-sm">
+                    <i class="fa fa-calendar-check fa-sm" title="Registrar Asistencia"></i>
+                </a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<!-- Botón de imprimir -->
+<button class="btn btn-secondary mt-3" onclick="window.print()">
+    <i class="fa fa-print"></i> Imprimir Lista
+</button>
+{% endblock contenido %}
+

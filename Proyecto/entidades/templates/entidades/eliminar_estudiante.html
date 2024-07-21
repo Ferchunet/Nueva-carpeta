@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliminar Estudiante</title>
+   
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #dc3545;
+        }
+        p {
+            font-size: 1.2em;
+        }
+        .button-group {
+            margin-top: 20px;
+        }
+        button, a {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            text-decoration: none;
+            color: #fff;
+            background-color: #dc3545;
+            border: none;
+            cursor: pointer;
+        }
+        a {
+            background-color: #007bff;
+        }
+        button:hover, a:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Eliminar Estudiante</h1>
+        <p>¿Estás seguro de que deseas eliminar a {{ estudiante.nombre }} {{ estudiante.apellido }}?</p>
+        <form method="post">
+            {% csrf_token %}
+            <div class="button-group">
+                <button type="submit">Eliminar</button>
+                <a href="{% url 'listar_estudiantes' %}">Volver a la lista</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

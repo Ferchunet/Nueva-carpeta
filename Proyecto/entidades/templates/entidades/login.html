@@ -1,0 +1,96 @@
+{% extends "entidades/home.html" %}
+
+{% block titulo %}
+<h1 class="mb-5">Login</h1>
+{% endblock titulo %}
+
+{% block contenido %}
+<style>
+body {
+    background: linear-gradient(to bottom, red, orange, pink); /* Fondo gradiente para el cuerpo */
+    font-family: Arial, sans-serif;
+    margin: 0; /* Eliminar margen predeterminado */
+    padding: 0; /* Eliminar relleno predeterminado */
+}
+
+.login-container {
+    display: flex;
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    height: 100vh; /* Alto completo de la pantalla */
+    margin-bottom: 50px; /* Margen inferior de 50px */
+}
+
+.login-form-container {
+    width: 50%; /* Ancho del 50% */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alinear a la izquierda */
+}
+
+.login-form {
+    width: 100%; /* Ancho completo */
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.9); /* Fondo blanco con transparencia */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Sombra */
+    text-align: center; /* Centrar el texto */
+    box-sizing: border-box; /* Incluir el relleno y el borde en el ancho total */
+}
+
+.login-form h2 {
+    margin-bottom: 20px; /* Espacio debajo del título */
+    font-size: 24px; /* Tamaño de fuente */
+    color: #333; /* Color del texto */
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"],
+.login-form input[type="submit"] {
+    width: 100%; /* Ancho completo de los campos y botón */
+    padding: 15px; /* Espacio alrededor de los campos y botón */
+    margin-bottom: 15px; /* Espacio inferior de 15px entre elementos */
+    border: 1px solid #ccc; /* Borde de los campos y botón */
+    border-radius: 5px; /* Bordes redondeados */
+    box-sizing: border-box; /* Incluir el relleno y el borde en el ancho total */
+}
+
+.login-form input[type="submit"] {
+    background: linear-gradient(45deg, #FF5733, #FFD700); /* Gradiente rojo a naranja */
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.login-form input[type="submit"]:hover {
+    background: linear-gradient(45deg, #E64A19, #FFEB3B); /* Gradiente al pasar el cursor */
+}
+
+</style>
+
+<div class="login-container">
+    <div class="login-form-container">
+        <div class="login-form">
+            <h2>school music</h2>
+            <form action="" method="post">
+                {% csrf_token %}
+                <div style="margin-bottom: 15px;">
+                    {{ form.username.label_tag }}
+                    {{ form.username }}
+                </div>
+                <div style="margin-bottom: 15px;">
+                    {{ form.password.label_tag }}
+                    {{ form.password }}
+                </div>
+                <input type="submit" value="Login">
+            </form>
+          
+                <a class="btn btn-primary" href="{% url 'registro' %}">
+                    <i class="fas fa-user-plus"></i> Registrarse
+                </a>
+            
+        </div>
+    </div>
+</div>
+{% endblock contenido %}

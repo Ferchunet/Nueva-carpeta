@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>escuela de musica</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i"
+        rel="stylesheet" />
+    <!-- Bootstrap core CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.2.3/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles -->
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+    <style>
+        body {
+            background: linear-gradient(to bottom, pink, red, orange);
+        }
+
+        .navbar-custom .navbar-brand {
+            margin-right: auto;
+            /* Alinear a la derecha */
+            margin-left: auto;
+            /* Alinear a la izquierda */
+        }
+
+        .navbar-custom .navbar-nav {
+            justify-content: center;
+            /* Centrar los elementos del navbar */
+        }
+
+        .navbar-custom .nav-item {
+            margin-left: 15px;
+            /* Espacio entre elementos */
+        }
+
+        .navbar-custom .nav-link {
+            color: white;
+            /* Color del texto */
+        }
+
+        .navbar-custom .nav-link:hover {
+            color: #ff6600;
+            /* Color del texto al pasar el cursor */
+        }
+
+        .custom-main {
+            height: 800px;
+            background: linear-gradient(to bottom, red, orange);
+        }
+
+        /* Estilo para el header */
+        .masthead {
+            height: 500px;
+            /* 20% del alto de la página */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body id="page-top">
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+        <div class="container px-5">
+         
+    
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+    
+            <div class="collapse navbar-collapse justify-content-center" id="navbarResponsive">
+                <ul class="navbar-nav">
+                    {% if user.is_authenticated %}
+                    <a class="navbar-brand" href="{% url 'inicio' %}">
+                        <i class="fas fa-home"></i> Inicio
+                    </a>
+                  
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'cursos' %}">
+                            <i class="fas fa-graduation-cap"></i> Cursos
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'profesores' %}">
+                            <i class="fas fa-chalkboard-teacher"></i> Profesores
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'listar_estudiantes' %}">
+                            <i class="fas fa-user-graduate"></i> Estudiantes
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="">
+                            <i class="fas fa-tasks"></i> seguimiento
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="">
+                            <i class="fas fa-tasks"></i>Biblioteca
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                            {% csrf_token %}
+                            <button class="btn btn-primary" type="submit">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </button>
+                        </form>
+                    </li>
+                    {% else %}
+                <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </a>
+                    </li>
+                
+                  
+                    
+                    {% endif %}
+                </ul>
+            </div>
+    
+            <div class="collapse navbar-collapse justify-content-end" id="navbarResponsive">
+                {% if user.is_authenticated %}
+                <p style="color: blue;">Bienvenido, {{ user.username }}</p>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <br><br><br>
+    <main class="custom-main">
+        <section class="py-5">
+            <div class="container px-5">
+                {% block contenido %}
+                {% endblock contenido %}
+            </div>
+        </section>
+    </main>
+    <!-- Footer-->
+    <footer style="background-color: black; color: white; padding: 20px;">
+        <div class="container text-center">
+            <div class="row">
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <h4 class="text-uppercase">Contacto</h4>
+                    <p class="lead mb-0">Dirección: Av. Música 123, Ciudad Melodía</p>
+                    <p class="lead mb-0">Teléfono: +1 (555) 123-4567</p>
+                    <p class="lead mb-0">Email: info@tuescuelamusical.com</p>
+                </div>
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <h4 class="text-uppercase">Redes Sociales</h4>
+                    <ul class="list-inline">
+                        <li class="list-inline-item">
+                            <a href="#" target="_blank" title="Síguenos en Facebook"><i class="fab fa-facebook-f"></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#" target="_blank" title="Síguenos en Twitter"><i class="fab fa-twitter"></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#" target="_blank" title="Síguenos en Instagram"><i class="fab fa-instagram"></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#" target="_blank" title="Síguenos en LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h4 class="text-uppercase">Acerca de Nosotros</h4>
+                    <p class="lead">Somos una escuela de música comprometida con la excelencia artística y educativa. Ofrecemos clases personalizadas de instrumentos, teoría musical y producción musical para estudiantes de todas las edades y niveles. Nuestro objetivo es inspirar y nutrir el talento musical de cada alumno, proporcionando un ambiente de aprendizaje estimulante y profesional.</p>
+                </div>
+            </div>
+        </div>
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            &copy; {{ year }} Tu Escuela Musical. Todos los derechos reservados.
+        </div>
+    </footer>
+    
+    
+
+    <!-- Bootstrap core JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS -->
+    <script src="{% static 'js/scripts.js' %}"></script>
+</body>
+
+</html>

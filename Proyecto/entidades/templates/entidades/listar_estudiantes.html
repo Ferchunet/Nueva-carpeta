@@ -1,0 +1,131 @@
+{% extends "entidades/home.html" %}
+
+{% block contenido %}
+
+    <title>Lista de Estudiantes</title>
+    <style>
+        .container-estudiantes {
+            max-width: 100%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .print-button {
+            margin-top: 20px;
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .print-button:hover {
+            background-color: #0056b3;
+        }
+        .acciones a {
+            margin-right: 10px;
+        }
+        @media print {
+            .print-button, a[href="{% url 'agregar_estudiante' %}"], .acciones, footer {
+                display: none;
+            }
+            .container-estudiantes {
+                box-shadow: none;
+                border: none;
+                margin: 0;
+                padding: 0;
+                width: 100%;
+            }
+            table, th, td {
+                border: 1px solid #000;
+            }
+            th {
+                background-color: #fff;
+            }
+            tr:nth-child(even) {
+                background-color: #fff;
+            }
+            tr:hover {
+                background-color: #fff;
+            }
+        }
+    </style>
+
+    <div class="container-estudiantes">
+        <h1>Lista de Estudiantes</h1>
+        <a class="print-button" onclick="window.print()">Imprimir Lista</a>
+        <a href="{% url 'agregar_estudiante' %}">Agregar Estudiante</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Email</th>
+                    <th>Fecha de Nacimiento</th>
+                    <th>Asistencia</th>
+                    <th>Faltas</th>
+                    <th class="acciones">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for estudiante in estudiantes %}
+                <tr>
+                    <td>{{ estudiante.nombre }}</td>
+                    <td>{{ estudiante.apellido }}</td>
+                    <td>{{ estudiante.email }}</td>
+                    <td>{{ estudiante.fecha_nacimiento }}</td>
+                    <td>{{ estudiante.asistencia }}</td>
+                    <td>{{ estudiante.faltas }}</td>
+                    <td class="acciones">
+                        <a href="{% url 'editar_estudiante' estudiante.pk %}" title="Editar"><i class="fas fa-edit"></i></a>
+                        <a href="{% url 'eliminar_estudiante' estudiante.pk %}" title="Eliminar"><i class="fas fa-trash-alt"></i></a>
+                        <a href="{% url 'registrar_asistencia' estudiante.pk %}" title="Registrar Asistencia"><i class="fas fa-check"></i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <footer>
+        <!-- Footer content -->
+    </footer>
+
+{% endblock contenido %}
