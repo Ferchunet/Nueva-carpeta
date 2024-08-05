@@ -23,7 +23,7 @@ class Estudiante(models.Model):
         return f"{self.nombre} {self.apellido}"
 
 class AsistenciaProfesor(models.Model):
-    profesor = models.ForeignKey('Profesor', on_delete=models.CASCADE)  # Cambia a 'Profesor'
+    profesor = models.ForeignKey('Profesor', on_delete=models.CASCADE) 
     fecha = models.DateField()
     presente = models.BooleanField(default=False)
 
@@ -38,8 +38,25 @@ class Profesor(models.Model):
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)
     email = models.EmailField()
-    telefono = models.CharField(max_length=15)  # Verifica que este campo exista
-    fecha_contratacion = models.DateField()  # Verifica que este campo exista
+    telefono = models.CharField(max_length=15)  
+    fecha_contratacion = models.DateField()  
 
     def __str__(self):
         return f"{self.nombre} {self.apellido}"
+from django.db import models
+
+class Curso(models.Model):
+    nombre = models.CharField(max_length=100)
+    comision = models.IntegerField() 
+
+    def __str__(self):
+        return f"{self.nombre} - Comisión {self.comision}"
+
+
+
+class Curso(models.Model):
+    nombre = models.CharField(max_length=100)
+    comision = models.IntegerField(null=True, blank=True) 
+
+    def __str__(self):
+        return f"{self.nombre} - Comisión {self.comision if self.comision else 'Sin Comisión'}"

@@ -8,14 +8,14 @@ from .models import AsistenciaProfesor, Avatar, Estudiante
 from .forms import AvatarForm, CursoForm, ProfesorForm, RegistroForm, UserEditForm
 from django.contrib.auth.decorators import login_required 
 from .forms import AsistenciaForm 
-# En entidades/views.py (si RegistroForm se utiliza aquí, cambia la importación)
 from .forms import RegistroForm
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import PasswordChangeView
-User = get_user_model()
-
+from django.shortcuts import render
+from .models import Curso         
+ User = get_user_model()
 from django.shortcuts import render
 from .models import AsistenciaProfesor, Avatar, Estudiante, Profesor
 
@@ -435,3 +435,14 @@ def profesorDelete(request, id_profesor):
     profesor.delete()
     contexto = {"profesores": Profesor.objects.all() }
     return render(request, "entidades/profesores.html", contexto)     
+
+
+
+from entidades.models import Curso
+
+
+cursos_sin_comision = Curso.objects.filter(comision__isnull=True)
+
+for curso in cursos_sin_comision:
+    curso.comision = 0  
+    curso.save()

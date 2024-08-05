@@ -1,26 +1,25 @@
 {% extends "entidades/home.html" %}
 
-
 {% block titulo %}
-<h1 class="mb-5">Cursos</h1>                                
+<h1 class="mb-5">Cursos</h1>
 {% endblock titulo %}
 
-
-{% block contenido %}   
+{% block contenido %}
+<form method="GET" action="{% url 'buscarCursos' %}" class="search-form">
+    <input type="text" name="q" placeholder="Buscar cursos..." value="{{ request.GET.q }}" class="form-control">
+    <button type="submit" class="btn btn-primary">Buscar</button>
+</form>
 
 <table>
     <tr>
         <td width="200"><h2>Cursos</h2></td>
         <td>
-            <a
-            href="{% url 'cursoForm' %}"
-            class="btn btn-primary btn-sm"
-            ><i class="fa fa-plus fa-lg" title="Crear"> </i>
+            <a href="{% url 'cursoForm' %}" class="btn btn-primary btn-sm">
+                <i class="fa fa-plus fa-lg" title="Crear"></i>
             </a>
-        </td>        
+        </td>
     </tr>
 </table>
-
 
 <table class="table table-striped">
     <thead>
@@ -32,29 +31,21 @@
         </tr>
     </thead>
     <tbody>
-    {% for c in cursos  %}
+        {% for c in cursos %}
         <tr>
             <td>{{ c.id }}</td>
             <td>{{ c.nombre }}</td>
             <td>{{ c.comision }}</td>
             <td>
-                <a
-                  href="{% url 'cursoUpdate' c.id %}"
-                  class="btn btn-primary"
-                  style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                  ><i class="fa fa-edit fa-sm" title="Edit Record"></i>
+                <a href="{% url 'cursoUpdate' c.id %}" class="btn btn-primary">
+                    <i class="fa fa-edit fa-sm" title="Edit Record"></i>
                 </a>
-                <a
-                  href="{% url 'cursoDelete' c.id %}"
-                  class="btn btn-danger"
-                  style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                  ><i class="fa fa-trash fa-sm" title="Delete Record"></i>
-                </a>                
-            </td>    
+                <a href="{% url 'cursoDelete' c.id %}" class="btn btn-danger">
+                    <i class="fa fa-trash fa-sm" title="Delete Record"></i>
+                </a>
+            </td>
         </tr>
-    {% endfor %}
+        {% endfor %}
     </tbody>
 </table>
 {% endblock contenido %}
-    
-    

@@ -1,0 +1,24 @@
+<!-- buscar_cursos.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Buscar Cursos</title>
+</head>
+<body>
+    <h1>Buscar Cursos</h1>
+    <form method="GET" action="{% url 'buscarCursos' %}">
+        <input type="text" name="q" value="{{ query }}" placeholder="Buscar cursos...">
+        <button type="submit">Buscar</button>
+    </form>
+
+    {% if cursos %}
+        <ul>
+            {% for curso in cursos %}
+                <li>{{ curso.nombre }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No se encontraron cursos.</p>
+    {% endif %}
+</body>
+</html>
